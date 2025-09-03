@@ -9,7 +9,7 @@ import com.light.composeanimfx.controller.PathAnimationController
  * @property controller The animation controller used to execute animations
  * @property currentDelay Cumulative delay since the start of the sequence (in milliseconds)
  */
-internal class AnimationSequenceScope internal constructor(
+class AnimationSequenceScope internal constructor(
     private val controller: PathAnimationController
 ) {
     private var currentDelay = 0L

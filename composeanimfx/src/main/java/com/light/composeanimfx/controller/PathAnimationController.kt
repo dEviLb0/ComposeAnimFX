@@ -25,7 +25,7 @@ import kotlinx.coroutines.launch
 
 class PathAnimationController(
     private val pathCount: Int,
-    val scope: CoroutineScope = CoroutineScope(SupervisorJob() + Dispatchers.Main)
+    val scope: CoroutineScope
 ) {
     private val runningJobs = mutableListOf<Job>()
 
@@ -71,12 +71,12 @@ class PathAnimationController(
      * Animates a single path with specified duration and delay
      * 
      * @param index The index of the path to animate (0-based)
-     * @param duration Duration of the animation in milliseconds (default: 0ms)
+     * @param duration Duration of the animation in milliseconds (default: 1000ms)
      * @param delay Delay before starting the animation in milliseconds (default: 0ms)
      */
     fun animatePath(
         index: Int,
-        duration: Int = 0,
+        duration: Int = 1000,
         delay: Int = 0
     ) {
         launchJob {
@@ -106,11 +106,11 @@ class PathAnimationController(
      * Animates multiple paths with specified duration
      * 
      * @param indices List of path indices to animate
-     * @param duration Duration of the animation in milliseconds (default: 0ms)
+     * @param duration Duration of the animation in milliseconds (default: 1000ms)
      */
     fun animatePaths(
         indices: List<Int>,
-        duration: Int = 0,
+        duration: Int = 1000,
     ) {
         indices.forEach {
             scope.launch {
@@ -124,12 +124,12 @@ class PathAnimationController(
      * Animates multiple paths with specified duration and delay
      * 
      * @param indices List of path indices to animate
-     * @param duration Duration of the animation in milliseconds (default: 0ms)
+     * @param duration Duration of the animation in milliseconds (default: 1000ms)
      * @param delay Delay before starting the animation in milliseconds (default: 0ms)
      */
     fun animatePaths(
         indices: List<Int>,
-        duration: Int = 0,
+        duration: Int = 1000,
         delay: Int = 0
     ) {
         indices.forEach {
@@ -153,10 +153,10 @@ class PathAnimationController(
     /**
      * Animates all paths together with specified duration
      * 
-     * @param duration Duration of the animation in milliseconds (default: 0ms)
+     * @param duration Duration of the animation in milliseconds (default: 1000ms)
      */
     fun animatePathsTogether(
-        duration: Int = 0
+        duration: Int = 1000
     ) {
         animatePaths(pathProgress.indices.toList(), duration)
     }
@@ -164,11 +164,11 @@ class PathAnimationController(
     /**
      * Animates all paths together with specified duration and delay
      * 
-     * @param duration Duration of the animation in milliseconds (default: 0ms)
+     * @param duration Duration of the animation in milliseconds (default: 1000ms)
      * @param delay Delay before starting the animation in milliseconds (default: 0ms)
      */
     fun animatePathsTogether(
-        duration: Int = 0,
+        duration: Int = 1000,
         delay: Int = 0
     ) {
         animatePaths(pathProgress.indices.toList(), duration, delay)
@@ -221,11 +221,11 @@ class PathAnimationController(
     /**
      * Animates all paths one after another with specified duration and delay between each
      * 
-     * @param duration Duration of each path animation in milliseconds (default: 0ms)
+     * @param duration Duration of each path animation in milliseconds (default: 1000ms)
      * @param delayBetween Delay between each path animation in milliseconds (default: 500ms)
      */
     fun animateAllPathsStaggered(
-        duration: Int = 0,
+        duration: Int = 1000,
         delayBetween: Int = 500
     ) {
         animatePathsStaggered(
@@ -282,9 +282,9 @@ class PathAnimationController(
     /**
      * Animates the fill with specified duration
      * 
-     * @param duration Duration of the fill animation in milliseconds (default: 600ms)
+     * @param duration Duration of the fill animation in milliseconds (default: 1000ms)
      */
-    fun animateFill(duration: Int = 600) {
+    fun animateFill(duration: Int = 1000) {
         launchJob {
             fillAlpha.animateTo(1f, tween(duration))
         }
