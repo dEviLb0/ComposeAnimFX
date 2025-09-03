@@ -28,15 +28,17 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
     kotlinOptions {
-        jvmTarget = "11"
+        jvmTarget = "17"
     }
     buildFeatures {
         compose = true
     }
+
+
 }
 
 dependencies {
@@ -57,4 +59,9 @@ dependencies {
     androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
+
+    //implementation("androidx.compose.ui:ui:1.7.0")
+    //implementation("androidx.compose.ui:ui-tooling-preview:1.7.0")
+    //debugImplementation("androidx.compose.ui:ui-tooling:1.7.0")
+    //implementation("androidx.compose.material3:material3:1.2.1")
 }
