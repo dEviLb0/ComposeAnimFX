@@ -50,7 +50,7 @@ fun ControllableAnimatedPaths(
     pivotY: Float,
     translateX: Float,
     translateY: Float,
-    drawStyle: DrawStyle?
+    drawStyles: List<DrawStyle>?
 ): PathAnimationController {
     val scope = rememberCoroutineScope()
     val controller = remember { PathAnimationController(paths.size, scope) }
@@ -69,7 +69,7 @@ fun ControllableAnimatedPaths(
                 val dst = Path()
                 val progress = controller.pathProgress.getOrNull(index)?.value ?: 0f
                 pm.getSegment(0f, pm.length * progress, dst, true)
-                drawPath(dst, colors[index], style = drawStyle ?: Fill)
+                drawPath(dst, colors[index], style = drawStyles?.getOrNull(index) ?: Fill)
             }
         }
     }

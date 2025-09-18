@@ -26,18 +26,9 @@ class PathAnimationBuilder(private val paths: List<Path>) {
     private var pivotY: Float = 0f
     private var translateX: Float = 0f
     private var translateY: Float = 0f
-    private var drawStyle: DrawStyle? = null
+    private var drawStyles: List<DrawStyle>? = null
 
-    /**
-     * Sets the colors for each path in the animation.
-     *
-     * @param colors A list of [Color] objects corresponding to each path.
-     * @return This builder instance for method chaining.
-     */
-    fun withColors(colors: List<Color>): PathAnimationBuilder {
-        this.colors = colors
-        return this
-    }
+
 
     /**
      * Sets a single color for all paths in the animation.
@@ -47,6 +38,17 @@ class PathAnimationBuilder(private val paths: List<Path>) {
      */
     fun withColor(color: Color): PathAnimationBuilder {
         this.colors = List(paths.size) { color }
+        return this
+    }
+
+    /**
+     * Sets the colors for each path in the animation.
+     *
+     * @param colors A list of [Color] objects corresponding to each path.
+     * @return This builder instance for method chaining.
+     */
+    fun withColors(colors: List<Color>): PathAnimationBuilder {
+        this.colors = colors
         return this
     }
 
@@ -101,8 +103,26 @@ class PathAnimationBuilder(private val paths: List<Path>) {
         return this
     }
 
+    /**
+     * Sets a uniform draw style for all paths in the animation.
+     *
+     * @param drawStyle The [DrawStyle] to apply to all paths (e.g., [androidx.compose.ui.graphics.drawscope.Fill] or [androidx.compose.ui.graphics.drawscope.Stroke]).
+     * @return This builder instance for method chaining.
+     */
     fun withDrawStyle(drawStyle: DrawStyle): PathAnimationBuilder {
-        this.drawStyle = drawStyle
+        this.drawStyles = List(paths.size){ drawStyle }
+        return this
+    }
+
+    /**
+     * Sets individual draw styles for each path in the animation.
+     *
+     * @param drawStyles A list of [DrawStyle] objects corresponding to each path.
+     *                  The list can contain null values to use default styles for specific paths.
+     * @return This builder instance for method chaining.
+     */
+    fun withDrawStyles(drawStyles: List<DrawStyle?>): PathAnimationBuilder {
+        this.drawStyles = drawStyles as List<DrawStyle>?
         return this
     }
 
@@ -126,7 +146,7 @@ class PathAnimationBuilder(private val paths: List<Path>) {
             pivotY =  pivotY,
             translateX = translateX,
             translateY = translateY,
-            drawStyle = drawStyle
+            drawStyles = drawStyles
         )
     }
 
