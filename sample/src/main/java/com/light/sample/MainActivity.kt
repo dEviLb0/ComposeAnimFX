@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.drawscope.Fill
 import androidx.compose.ui.graphics.drawscope.Stroke
 import com.light.composeanimfx.buildPathAnimation
 
@@ -50,14 +51,15 @@ class MainActivity : ComponentActivity() {
                 var drawStyle = Stroke(
                     width = 2f
                 )
-
+                var drawStyle2 = Fill
                 // Configure the animation controller with path data and visual properties
                 val controller = buildPathAnimation(Paths.toList())
                     .withColors(Paths.pathsColors())  // Set colors for each path
                     .withScale(3f)                    // Scale the entire drawing
                     .withPivot(10f, 10f)              // Set rotation/scaling pivot point
                     .withTranslation(120f, 300f)      // Position the drawing
-                    .withDrawStyle(drawStyle)          // Apply the drawing style (stroke/fill)
+                    //.withDrawStyle(drawStyle)          // Apply the drawing style (stroke/fill)
+                    .withDrawStyles(listOf(drawStyle, drawStyle2, null, null, drawStyle, null,null)) // Apply different styles to different paths
                     .build()                           // Finalize and create the controller
 
                 // The drawing is already rendered at this point
@@ -78,7 +80,8 @@ class MainActivity : ComponentActivity() {
                             // Each animation lasts 2000ms
                             animatePathsStaggered(
                                 listOf(1,2,6,4),
-                                500
+                                durationPerPath = 1000,
+                                500,
                             )
                         }
 

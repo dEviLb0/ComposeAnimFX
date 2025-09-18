@@ -27,6 +27,9 @@ class PathAnimationController(
     private val pathCount: Int,
     val scope: CoroutineScope
 ) {
+    /**
+     * List of currently running animation jobs for tracking and cancellation
+     */
     private val runningJobs = mutableListOf<Job>()
 
     /**
@@ -139,8 +142,6 @@ class PathAnimationController(
             }
         }
     }
-
-
 
 
     /**
@@ -271,7 +272,8 @@ class PathAnimationController(
     }
 
     /**
-     * Animates the fill with default duration (600ms)
+     * Animates the fill with a smooth transition from transparent to opaque
+     * using a default duration of 600ms
      */
     fun animateFill() {
         launchJob {
