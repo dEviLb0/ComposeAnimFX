@@ -1,11 +1,12 @@
 {
   "name": "composeanimfx",
-  "version": "1.0.0",
+  "version": "0.1.0-rc01",
   "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "prepare": "husky"
+    "prepare": "husky && husky install",
+    "release": "standard-version"
   },
   "repository": {
     "type": "git",
@@ -24,7 +25,8 @@
     "@commitlint/config-conventional": "^19.8.1",
     "commitizen": "^4.3.1",
     "cz-conventional-changelog": "^3.3.0",
-    "husky": "^9.1.7"
+    "husky": "^9.1.7",
+    "standard-version": "^9.5.0"
   },
   "config": {
     "commitizen": {
